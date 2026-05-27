@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+venv/
+.venv/
+env/
+.env/
+
+# Environment / secrets
+.env
+*.env
+config.json
+google_token.json
+credentials.json
+service_account.json
+
+# IDEs
+.idea/
+.vscode/
+*.suo
+*.user
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Java / Kotlin
+*.class
+*.jar
+*.war
+target/
+
+# Compiled / binary
+*.exe
+*.dll
+*.so
+*.o
+*.a
