@@ -1,0 +1,135 @@
+/* ==========================================================================
+   tokens.css — PersonalAssistant Design System
+   All CSS custom properties. Every subsequent file uses ONLY these tokens.
+   No hardcoded values anywhere else.
+   ========================================================================== */
+
+:root {
+
+  /* --------------------------------------------------------------------------
+     COLOR — Background scale
+     Base: #0d0f12 near-black with warm undertone
+  -------------------------------------------------------------------------- */
+  --color-bg:           #0d0f12;   /* page background */
+  --color-bg-elevated:  #13161a;   /* sidebar, modals, elevated surfaces */
+  --color-bg-card:      #1a1d22;   /* cards, assistant bubble bg */
+  --color-bg-input:     #0f1215;   /* input fields */
+
+  /* --------------------------------------------------------------------------
+     COLOR — Text
+     Primary: warm cream, never pure white
+  -------------------------------------------------------------------------- */
+  --color-text-primary:   #f0ead6;  /* warm cream — main body text */
+  --color-text-secondary: #b8b0a0;  /* secondary labels, subtitles */
+  --color-text-muted:     #6e6860;  /* placeholders, timestamps, hints */
+  --color-text-inverse:   #0d0f12;  /* dark text on light surfaces */
+
+  /* --------------------------------------------------------------------------
+     COLOR — Accent
+     Burnished amber — CTAs, focus rings, active states
+  -------------------------------------------------------------------------- */
+  --color-accent:       #c97d2e;
+  --color-accent-hover: #e08e36;
+  --color-accent-muted: rgba(201, 125, 46, 0.15);
+
+  /* --------------------------------------------------------------------------
+     COLOR — Borders & states
+  -------------------------------------------------------------------------- */
+  --color-border:       rgba(240, 234, 214, 0.10);  /* subtle warm border */
+  --color-border-focus: #c97d2e;                     /* amber focus ring */
+  --color-error:        #c0392b;
+  --color-success:      #27ae60;
+
+  /* --------------------------------------------------------------------------
+     COLOR — Chat bubbles
+  -------------------------------------------------------------------------- */
+  --color-user-bubble-bg:        #f0ead6;  /* cream — user message background */
+  --color-user-bubble-text:      #0d0f12;  /* dark text on cream */
+  --color-assistant-bubble-bg:   #1a1d22;  /* slightly lighter dark card */
+  --color-assistant-bubble-text: #f0ead6;  /* warm cream */
+
+  /* --------------------------------------------------------------------------
+     TYPOGRAPHY — Font families
+  -------------------------------------------------------------------------- */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-mono:    'DM Mono', 'Courier New', monospace;
+  --font-body:    'DM Mono', 'Courier New', monospace;  /* app is chat/data — mono feels precise */
+
+  /* --------------------------------------------------------------------------
+     TYPOGRAPHY — Font sizes (rem scale)
+  -------------------------------------------------------------------------- */
+  --text-xs:   0.6875rem;  /* 11px */
+  --text-sm:   0.75rem;    /* 12px */
+  --text-base: 0.875rem;   /* 14px */
+  --text-md:   1rem;       /* 16px */
+  --text-lg:   1.125rem;   /* 18px */
+  --text-xl:   1.25rem;    /* 20px */
+  --text-2xl:  1.5rem;     /* 24px */
+  --text-3xl:  2rem;       /* 32px */
+  --text-4xl:  2.5rem;     /* 40px */
+
+  /* --------------------------------------------------------------------------
+     TYPOGRAPHY — Font weights
+  -------------------------------------------------------------------------- */
+  --weight-normal:   400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* --------------------------------------------------------------------------
+     SPACING — 0.25rem (4px) steps
+  -------------------------------------------------------------------------- */
+  --space-1:  0.25rem;   /*  4px */
+  --space-2:  0.5rem;    /*  8px */
+  --space-3:  0.75rem;   /* 12px */
+  --space-4:  1rem;      /* 16px */
+  --space-5:  1.25rem;   /* 20px */
+  --space-6:  1.5rem;    /* 24px */
+  --space-7:  1.75rem;   /* 28px */
+  --space-8:  2rem;      /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-14: 3.5rem;    /* 56px */
+  --space-16: 4rem;      /* 64px */
+
+  /* --------------------------------------------------------------------------
+     BORDER RADIUS
+  -------------------------------------------------------------------------- */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-full: 9999px;
+
+  /* --------------------------------------------------------------------------
+     SHADOWS
+  -------------------------------------------------------------------------- */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4),
+               0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5),
+               0 2px 6px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6),
+               0 4px 12px rgba(0, 0, 0, 0.4);
+
+  /* --------------------------------------------------------------------------
+     MOTION — Transitions
+     Slow, deliberate. 300–500ms. No bounce.
+  -------------------------------------------------------------------------- */
+  --transition-fast: 150ms;
+  --transition-base: 300ms;
+  --transition-slow: 500ms;
+
+  --ease-out:    cubic-bezier(0.0, 0.0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0.0, 0.2, 1);
+
+  /* --------------------------------------------------------------------------
+     LAYOUT
+  -------------------------------------------------------------------------- */
+  --content-width: 680px;
+  --sidebar-width: 260px;
+
+  /* --------------------------------------------------------------------------
+     TEXTURE
+  -------------------------------------------------------------------------- */
+  --noise-opacity: 0.035;
+}

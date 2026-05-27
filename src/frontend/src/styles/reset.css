@@ -1,0 +1,176 @@
+/* ==========================================================================
+   reset.css — PersonalAssistant Design System
+   Modern CSS reset using design tokens throughout.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Box sizing
+-------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* --------------------------------------------------------------------------
+   Remove default margins and padding
+-------------------------------------------------------------------------- */
+*,
+h1, h2, h3, h4, h5, h6,
+p, blockquote, pre,
+dl, dd, ol, ul, figure,
+fieldset, legend, textarea,
+hr, button, input, select {
+  margin: 0;
+  padding: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Root / html
+-------------------------------------------------------------------------- */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  height: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Body
+-------------------------------------------------------------------------- */
+body {
+  min-height: 100%;
+  line-height: 1.5;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* --------------------------------------------------------------------------
+   Lists
+-------------------------------------------------------------------------- */
+ol,
+ul {
+  list-style: none;
+}
+
+/* --------------------------------------------------------------------------
+   Images and media
+-------------------------------------------------------------------------- */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Form elements inherit font
+-------------------------------------------------------------------------- */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* --------------------------------------------------------------------------
+   Textarea non-resizable by default
+-------------------------------------------------------------------------- */
+textarea {
+  resize: vertical;
+}
+
+/* --------------------------------------------------------------------------
+   Anchor reset
+-------------------------------------------------------------------------- */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------
+   Button reset
+-------------------------------------------------------------------------- */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Horizontal rule
+-------------------------------------------------------------------------- */
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  height: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Tables
+-------------------------------------------------------------------------- */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Hidden utility
+-------------------------------------------------------------------------- */
+[hidden] {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   Focus management
+   :focus-visible — keyboard/programmatic focus only (not mouse click)
+-------------------------------------------------------------------------- */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* --------------------------------------------------------------------------
+   Selection
+-------------------------------------------------------------------------- */
+::selection {
+  background-color: var(--color-accent-muted);
+  color: var(--color-text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   Scrollbar (webkit — subtle dark styling)
+-------------------------------------------------------------------------- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(240, 234, 214, 0.12);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(240, 234, 214, 0.22);
+}

@@ -1,0 +1,599 @@
+/* ==========================================================================
+   widgets.css — PersonalAssistant Design System
+   Generative UI widget styles — all slide in from below with subtle fade.
+   All widget types: slider, radio, checkbox, scale, multi-select,
+   date picker, confirm.
+   All values via token variables only.
+   ========================================================================== */
+
+/* ==========================================================================
+   WIDGET CONTAINER
+   Card-style with amber left-border accent + widgetReveal animation
+   ========================================================================== */
+
+.widget-container {
+  background-color: var(--color-bg-card);
+  border-radius:    var(--radius-lg);
+  border:           1px solid var(--color-border);
+  border-left:      3px solid var(--color-accent);
+  box-shadow:       var(--shadow-md);
+  padding:          var(--space-5) var(--space-6);
+  margin:           var(--space-3) 0;
+  display:          flex;
+  flex-direction:   column;
+  gap:              var(--space-4);
+  animation:        widgetReveal var(--transition-slow) var(--ease-out) both;
+  max-width:        var(--content-width);
+}
+
+/* ==========================================================================
+   WIDGET HEADER
+   ========================================================================== */
+
+.widget-label {
+  font-family:    var(--font-mono);
+  font-size:      var(--text-xs);
+  font-weight:    var(--weight-semibold);
+  color:          var(--color-accent);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  line-height:    1;
+}
+
+.widget-description {
+  font-family: var(--font-mono);
+  font-size:   var(--text-sm);
+  color:       var(--color-text-secondary);
+  line-height: 1.55;
+  margin-top:  calc(-1 * var(--space-2));
+}
+
+/* ==========================================================================
+   WIDGET SUBMIT BUTTON
+   Full-width, btn-primary variant
+   ========================================================================== */
+
+.widget-submit-btn {
+  width:            100%;
+  display:          flex;
+  align-items:      center;
+  justify-content:  center;
+  gap:              var(--space-2);
+  padding:          var(--space-3) var(--space-5);
+  border-radius:    var(--radius-sm);
+  font-family:      var(--font-mono);
+  font-size:        var(--text-sm);
+  font-weight:      var(--weight-medium);
+  letter-spacing:   0.04em;
+  text-transform:   uppercase;
+  background-color: var(--color-accent);
+  border:           1px solid var(--color-accent);
+  color:            var(--color-text-inverse);
+  cursor:           pointer;
+  margin-top:       var(--space-2);
+  transition:
+    background-color var(--transition-base) var(--ease-out),
+    transform        var(--transition-fast) var(--ease-out);
+}
+
+.widget-submit-btn:hover:not(:disabled) {
+  background-color: var(--color-accent-hover);
+  border-color:     var(--color-accent-hover);
+}
+
+.widget-submit-btn:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.widget-submit-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.widget-submit-btn:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   SLIDER WIDGET
+   Custom range input — amber thumb + track styling
+   ========================================================================== */
+
+.widget-slider-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.widget-slider-track-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.widget-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    var(--color-accent) 0%,
+    var(--color-accent) var(--slider-pct, 0%),
+    var(--color-border) var(--slider-pct, 0%),
+    var(--color-border) 100%
+  );
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  outline: none;
+}
+
+/* Thumb — webkit */
+.widget-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent);
+  border: 2px solid var(--color-bg);
+  box-shadow: 0 0 0 2px var(--color-accent);
+  cursor: pointer;
+  transition: transform var(--transition-fast) var(--ease-out),
+              box-shadow var(--transition-fast) var(--ease-out);
+}
+
+.widget-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 0 3px var(--color-accent-muted), 0 0 0 5px rgba(201, 125, 46, 0.2);
+}
+
+/* Thumb — moz */
+.widget-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent);
+  border: 2px solid var(--color-bg);
+  box-shadow: 0 0 0 2px var(--color-accent);
+  cursor: pointer;
+  transition: transform var(--transition-fast) var(--ease-out);
+}
+
+.widget-slider::-moz-range-thumb:hover {
+  transform: scale(1.15);
+}
+
+.widget-slider:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px var(--color-border-focus);
+}
+
+.widget-slider:focus-visible::-moz-range-thumb {
+  box-shadow: 0 0 0 3px var(--color-border-focus);
+}
+
+.widget-slider__value {
+  font-family: var(--font-mono);
+  font-size:   var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color:       var(--color-accent);
+  min-width:   3.5ch;
+  text-align:  right;
+}
+
+.widget-slider__range-labels {
+  display:         flex;
+  justify-content: space-between;
+  font-family:     var(--font-mono);
+  font-size:       var(--text-xs);
+  color:           var(--color-text-muted);
+}
+
+/* ==========================================================================
+   RADIO GROUP WIDGET
+   Custom radio with amber dot
+   ========================================================================== */
+
+.widget-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.widget-radio-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-input);
+  cursor: pointer;
+  transition:
+    border-color     var(--transition-base) var(--ease-out),
+    background-color var(--transition-base) var(--ease-out);
+  user-select: none;
+}
+
+.widget-radio-option:hover {
+  border-color:     var(--color-accent);
+  background-color: var(--color-accent-muted);
+}
+
+.widget-radio-option:focus-within {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.widget-radio-option--selected {
+  border-color:     var(--color-accent);
+  background-color: var(--color-accent-muted);
+}
+
+.widget-radio-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.widget-radio-option__dot {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-text-muted);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color var(--transition-base) var(--ease-out);
+}
+
+.widget-radio-option--selected .widget-radio-option__dot {
+  border-color: var(--color-accent);
+}
+
+.widget-radio-option__dot::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-accent);
+  transform: scale(0);
+  transition: transform var(--transition-base) var(--ease-out);
+}
+
+.widget-radio-option--selected .widget-radio-option__dot::after {
+  transform: scale(1);
+}
+
+.widget-radio-option__label {
+  font-family: var(--font-mono);
+  font-size:   var(--text-sm);
+  color:       var(--color-text-primary);
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   CHECKBOX GROUP WIDGET
+   Custom checkbox with amber check
+   ========================================================================== */
+
+.widget-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.widget-checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-input);
+  cursor: pointer;
+  transition:
+    border-color     var(--transition-base) var(--ease-out),
+    background-color var(--transition-base) var(--ease-out);
+  user-select: none;
+}
+
+.widget-checkbox-item:hover {
+  border-color:     var(--color-accent);
+  background-color: var(--color-accent-muted);
+}
+
+.widget-checkbox-item:focus-within {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.widget-checkbox-item--checked {
+  border-color:     var(--color-accent);
+  background-color: var(--color-accent-muted);
+}
+
+.widget-checkbox-item input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.widget-checkbox-item__box {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--color-text-muted);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    border-color     var(--transition-base) var(--ease-out),
+    background-color var(--transition-base) var(--ease-out);
+}
+
+.widget-checkbox-item--checked .widget-checkbox-item__box {
+  border-color:     var(--color-accent);
+  background-color: var(--color-accent);
+}
+
+.widget-checkbox-item__box::after {
+  content: '';
+  width: 4px;
+  height: 7px;
+  border: 2px solid var(--color-text-inverse);
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg) scale(0);
+  transition: transform var(--transition-base) var(--ease-out);
+  margin-top: -2px;
+}
+
+.widget-checkbox-item--checked .widget-checkbox-item__box::after {
+  transform: rotate(45deg) scale(1);
+}
+
+.widget-checkbox-item__label {
+  font-family: var(--font-mono);
+  font-size:   var(--text-sm);
+  color:       var(--color-text-primary);
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   SCALE RATING WIDGET
+   Row of numbered buttons — amber on selected
+   ========================================================================== */
+
+.widget-scale {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.widget-scale__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-input);
+  font-family: var(--font-mono);
+  font-size:   var(--text-sm);
+  font-weight: var(--weight-medium);
+  color:       var(--color-text-secondary);
+  cursor: pointer;
+  transition:
+    border-color     var(--transition-base) var(--ease-out),
+    background-color var(--transition-base) var(--ease-out),
+    color            var(--transition-base) var(--ease-out),
+    transform        var(--transition-fast) var(--ease-out);
+}
+
+.widget-scale__btn:hover:not(:disabled) {
+  border-color:     var(--color-accent);
+  background-color: var(--color-accent-muted);
+  color:            var(--color-accent);
+}
+
+.widget-scale__btn:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.widget-scale__btn:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.widget-scale__btn--selected {
+  border-color:     var(--color-accent);
+  background-color: var(--color-accent);
+  color:            var(--color-text-inverse);
+}
+
+.widget-scale__btn--selected:hover {
+  background-color: var(--color-accent-hover);
+}
+
+/* ==========================================================================
+   MULTI-SELECT WIDGET
+   Pill-style toggleable chips
+   ========================================================================== */
+
+.widget-multi-select {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.widget-multi-select__chip {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-bg-input);
+  font-family: var(--font-mono);
+  font-size:   var(--text-xs);
+  font-weight: var(--weight-medium);
+  color:       var(--color-text-secondary);
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    border-color     var(--transition-base) var(--ease-out),
+    background-color var(--transition-base) var(--ease-out),
+    color            var(--transition-base) var(--ease-out);
+}
+
+.widget-multi-select__chip:hover {
+  border-color:     var(--color-accent);
+  color:            var(--color-accent);
+  background-color: var(--color-accent-muted);
+}
+
+.widget-multi-select__chip:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.widget-multi-select__chip--selected {
+  border-color:     var(--color-accent);
+  background-color: var(--color-accent-muted);
+  color:            var(--color-accent);
+}
+
+/* ==========================================================================
+   DATE INPUT WIDGET
+   Styled date input, consistent with form tokens
+   ========================================================================== */
+
+.widget-date-input {
+  background-color: var(--color-bg-input);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-mono);
+  font-size:   var(--text-sm);
+  color:       var(--color-text-primary);
+  width:       100%;
+  cursor:      pointer;
+  transition:
+    border-color var(--transition-base) var(--ease-out),
+    box-shadow   var(--transition-base) var(--ease-out);
+
+  /* Remove default date input arrow in webkit */
+  -webkit-appearance: none;
+  appearance: none;
+
+  /* Calendar icon tinting */
+  color-scheme: dark;
+}
+
+.widget-date-input:focus {
+  outline:      none;
+  border-color: var(--color-border-focus);
+  box-shadow:   0 0 0 2px var(--color-accent-muted);
+}
+
+.widget-date-input::-webkit-calendar-picker-indicator {
+  filter: invert(70%) sepia(30%) saturate(500%) hue-rotate(10deg);
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.widget-date-input::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   CONFIRM WIDGET
+   Two-button yes/no layout
+   ========================================================================== */
+
+.widget-confirm {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.widget-confirm__yes {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-family:   var(--font-mono);
+  font-size:     var(--text-sm);
+  font-weight:   var(--weight-medium);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background-color: var(--color-accent);
+  border:           1px solid var(--color-accent);
+  color:            var(--color-text-inverse);
+  cursor:           pointer;
+  transition:
+    background-color var(--transition-base) var(--ease-out),
+    transform        var(--transition-fast) var(--ease-out);
+}
+
+.widget-confirm__yes:hover {
+  background-color: var(--color-accent-hover);
+  border-color:     var(--color-accent-hover);
+}
+
+.widget-confirm__yes:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.widget-confirm__yes:active {
+  transform: translateY(1px);
+}
+
+.widget-confirm__no {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-family:   var(--font-mono);
+  font-size:     var(--text-sm);
+  font-weight:   var(--weight-medium);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background-color: transparent;
+  border:           1px solid var(--color-border);
+  color:            var(--color-text-secondary);
+  cursor:           pointer;
+  transition:
+    border-color     var(--transition-base) var(--ease-out),
+    background-color var(--transition-base) var(--ease-out),
+    color            var(--transition-base) var(--ease-out),
+    transform        var(--transition-fast) var(--ease-out);
+}
+
+.widget-confirm__no:hover {
+  border-color:     var(--color-text-secondary);
+  background-color: rgba(240, 234, 214, 0.04);
+  color:            var(--color-text-primary);
+}
+
+.widget-confirm__no:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.widget-confirm__no:active {
+  transform: translateY(1px);
+}

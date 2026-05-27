@@ -1,0 +1,321 @@
+/* ==========================================================================
+   chat.css — PersonalAssistant Design System
+   Complete chat interface styles.
+   All values via token variables only.
+   ========================================================================== */
+
+/* ==========================================================================
+   CHAT CONTAINER
+   Full-height flex column — fills the main content area
+   ========================================================================== */
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ==========================================================================
+   CHAT MESSAGES
+   Scrollable message list
+   ========================================================================== */
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--space-8) var(--space-6) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  scroll-behavior: smooth;
+
+  /* fade out at top to indicate scrollable history */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 5%,
+    black 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 5%,
+    black 100%
+  );
+}
+
+/* Spacer at bottom so last message isn't obscured by input bar */
+.chat-messages::after {
+  content: '';
+  display: block;
+  height: var(--space-4);
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   BUBBLE WRAPPER
+   Controls left/right alignment per role
+   ========================================================================== */
+
+.chat-bubble-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  gap: var(--space-1);
+}
+
+.chat-bubble-wrapper--user {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.chat-bubble-wrapper--assistant {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+/* ==========================================================================
+   CHAT BUBBLE
+   ========================================================================== */
+
+.chat-bubble {
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  line-height: 1.6;
+  word-break: break-word;
+  white-space: pre-wrap;
+  position: relative;
+}
+
+/* User bubble — right-aligned, cream background, dark text */
+.chat-bubble--user {
+  background-color: var(--color-user-bubble-bg);
+  color:            var(--color-user-bubble-text);
+  font-family:      var(--font-display);
+  font-size:        var(--text-lg);
+  font-weight:      var(--weight-normal);
+  letter-spacing:   0.005em;
+  border-bottom-right-radius: var(--radius-sm);
+  animation: slideInRight var(--transition-base) var(--ease-out) both;
+}
+
+/* Assistant bubble — left-aligned, elevated dark card, DM Mono */
+.chat-bubble--assistant {
+  background-color: var(--color-assistant-bubble-bg);
+  color:            var(--color-assistant-bubble-text);
+  font-family:      var(--font-mono);
+  font-size:        var(--text-base);
+  font-weight:      var(--weight-normal);
+  border: 1px solid var(--color-border);
+  border-bottom-left-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  animation: slideInLeft var(--transition-base) var(--ease-out) both;
+}
+
+/* ==========================================================================
+   BUBBLE TIMESTAMP
+   ========================================================================== */
+
+.chat-bubble__timestamp {
+  font-family: var(--font-mono);
+  font-size:   var(--text-xs);
+  color:       var(--color-text-muted);
+  line-height: 1;
+  margin-top:  var(--space-1);
+  letter-spacing: 0.03em;
+}
+
+.chat-bubble-wrapper--user .chat-bubble__timestamp {
+  text-align: right;
+}
+
+/* ==========================================================================
+   TYPING INDICATOR
+   Three dots using animation.css typingDot keyframe
+   ========================================================================== */
+
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-4) var(--space-5);
+  background-color: var(--color-assistant-bubble-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  border-bottom-left-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  width: fit-content;
+  animation: fadeIn var(--transition-base) var(--ease-out) both;
+}
+
+.typing-indicator__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-text-muted);
+  animation: typingDot var(--transition-slow) var(--ease-in-out) infinite;
+}
+
+.typing-indicator__dot:nth-child(1) { animation-delay: 0ms; }
+.typing-indicator__dot:nth-child(2) { animation-delay: 160ms; }
+.typing-indicator__dot:nth-child(3) { animation-delay: 320ms; }
+
+/* ==========================================================================
+   CHAT INPUT BAR
+   Sticky bottom — blurred backdrop, border-top accent
+   ========================================================================== */
+
+.chat-input-bar {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--space-4) var(--space-6) var(--space-5);
+  background-color: rgba(13, 15, 18, 0.85);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+  z-index: 10;
+}
+
+/* ==========================================================================
+   CHAT INPUT
+   Auto-resize textarea feel
+   ========================================================================== */
+
+.chat-input {
+  flex: 1;
+  background-color: var(--color-bg-input);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  resize: none;
+  min-height: 2.75rem;
+  max-height: 10rem;
+  overflow-y: auto;
+  transition:
+    border-color var(--transition-base) var(--ease-out),
+    box-shadow   var(--transition-base) var(--ease-out);
+}
+
+.chat-input::placeholder {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  letter-spacing: 0.02em;
+}
+
+.chat-input:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 2px var(--color-accent-muted);
+}
+
+/* ==========================================================================
+   SEND BUTTON
+   Amber accent — icon-only on mobile
+   ========================================================================== */
+
+.chat-send-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--radius-md);
+  background-color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  color: var(--color-text-inverse);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background-color var(--transition-base) var(--ease-out),
+    transform        var(--transition-fast) var(--ease-out),
+    opacity          var(--transition-base) var(--ease-out);
+}
+
+.chat-send-btn:hover:not(:disabled) {
+  background-color: var(--color-accent-hover);
+  border-color:     var(--color-accent-hover);
+}
+
+.chat-send-btn:focus-visible {
+  outline: 2px solid var(--color-border-focus);
+  outline-offset: 2px;
+}
+
+.chat-send-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.chat-send-btn:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+.chat-send-btn svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+/* Hide label on small screens — icon only */
+.chat-send-btn__label {
+  display: none;
+}
+
+@media (min-width: 480px) {
+  .chat-send-btn {
+    width: auto;
+    padding: 0 var(--space-4);
+    gap: var(--space-2);
+  }
+
+  .chat-send-btn__label {
+    display: inline;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+}
+
+/* ==========================================================================
+   DATE SEPARATOR
+   Divides conversation by day
+   ========================================================================== */
+
+.chat-date-separator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-4) 0;
+}
+
+.chat-date-separator::before,
+.chat-date-separator::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--color-border);
+}
+
+.chat-date-separator__label {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
